@@ -1,17 +1,9 @@
-FROM python:3.9-slim
+FROM nginx:alpine
 
-WORKDIR /app
+# Copy custom HTML file
+COPY index.html /usr/share/nginx/html/index.html
 
-# Install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Expose port 80
+EXPOSE 80
 
-# Copy application source files
-COPY main.py .
-
-# Expose the port the app runs on
-EXPOSE 8000
-
-# Start the app
-CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-
+# Nginx starts automatically, no CMD needed
