@@ -23,6 +23,11 @@ SECRET_KEY = os.getenv("JWT_SECRET_KEY", "your-secret-key-change-in-production")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
+# Environment Configuration
+ENVIRONMENT = os.getenv("ENVIRONMENT", "dev")
+LOG_LEVEL = os.getenv("LOG_LEVEL", "info")
+PORT = int(os.getenv("PORT", "8001"))
+
 security = HTTPBearer()
 
 # Data Models
@@ -315,4 +320,4 @@ async def health_check():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=PORT)
